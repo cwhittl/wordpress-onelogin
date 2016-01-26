@@ -16,6 +16,7 @@ if ( !function_exists( 'add_action' ) ) {
 
 require_once plugin_dir_path(__FILE__)."php/functions.php";
 require_once plugin_dir_path(__FILE__)."php/configuration.php";
+require_once plugin_dir_path(__FILE__)."php/lib/OLLoginButton.php";
 
 // Localization
 add_action( 'init', 'saml_load_translations');
@@ -39,7 +40,7 @@ if ($prevent_reset_password) {
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
 
 // Handle SLO
-if (isset($_COOKIE['saml_login']) && get_option('onelogin_saml_slo')) { 
+if (isset($_COOKIE['saml_login']) && get_option('onelogin_saml_slo')) {
 	add_action('init', 'saml_slo', 1);
 }
 
@@ -71,3 +72,4 @@ if (!$local_wp_actions) {
 
 add_action('user_register', 'saml_user_register', 1);
 add_action('register_form', 'saml_user_register', 1);
+new OLLoginButton();
