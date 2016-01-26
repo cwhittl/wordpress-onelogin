@@ -28,13 +28,6 @@ class OLLoginButton
             $site_url = wp_login_url();
             if ($this->redirect_to != "") {
                 $redirect = $this->redirect_to;
-
-                if (is_multisite()) {
-                    $blog_info = get_blog_details();
-
-                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-                    $redirect = $protocol . $blog_info->domain . $blog_info->path . "wp-admin/";
-                }
                 $url = $site_url . "?ForceOL=" . $redirect;
             }
             else {
